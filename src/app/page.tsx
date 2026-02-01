@@ -29,7 +29,8 @@ export default function Home() {
       })
 
       const data = await response.json()
-      setMessages(prev => [...prev, { role: 'assistant', content: data.answer }])
+      const content = data.answer || data.error || 'No response received.'
+      setMessages(prev => [...prev, { role: 'assistant', content }])
     } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
