@@ -58,7 +58,10 @@ export default function Home() {
       <div className="max-w-3xl mx-auto flex flex-col min-h-screen">
         {/* Header */}
         <header className="bg-white border-b border-slate-200 px-6 py-5">
-          <h1 className="text-2xl font-semibold text-slate-800">Internal Knowledge Assistant</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-semibold text-slate-800">Internal Knowledge Assistant</h1>
+            <span className="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">DEMO</span>
+          </div>
           <p className="text-slate-500 mt-1">Ask questions about company policies and procedures</p>
         </header>
 
@@ -144,6 +147,18 @@ export default function Home() {
             </button>
           </form>
         </div>
+
+        {/* Footer */}
+        <footer className="bg-white border-t border-slate-200 px-6 py-3 text-center">
+          <a
+            href="https://ycprojects.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-slate-500 hover:text-slate-700 transition-colors"
+          >
+            Built by YC Projects
+          </a>
+        </footer>
       </div>
     </main>
   )
