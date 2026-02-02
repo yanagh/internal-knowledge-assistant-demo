@@ -31,10 +31,11 @@ export default function Home() {
       const data = await response.json()
       const content = data.answer || data.error || 'No response received.'
       setMessages(prev => [...prev, { role: 'assistant', content }])
-    } catch {
+    } catch (err) {
+      console.error('Fetch error:', err)
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'An error occurred. Please try again.'
+        content: `Error: ${err instanceof Error ? err.message : 'Unknown error'}`
       }])
     } finally {
       setLoading(false)
