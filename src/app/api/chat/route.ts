@@ -1,21 +1,110 @@
 import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
-import fs from 'fs'
-import path from 'path'
 
-const KNOWLEDGE_BASE = loadKnowledgeBase()
+const KNOWLEDGE_BASE = `# Company Overview
 
-function loadKnowledgeBase(): string {
-  const docsDir = path.join(process.cwd(), 'docs')
-  const files = fs.readdirSync(docsDir).filter(f => f.endsWith('.md'))
+We are a mid-sized real estate company operating in Georgia.
 
-  const docs = files.map(file => {
-    const content = fs.readFileSync(path.join(docsDir, file), 'utf-8')
-    return content
-  })
+We focus on:
+- Residential apartments
+- Commercial spaces
+- Investment properties
 
-  return docs.join('\n\n---\n\n')
-}
+Main markets:
+- Tbilisi
+- Batumi
+- Kutaisi
+
+Clients include:
+- Individual buyers
+- Investors
+- Corporate tenants
+
+The company works with both local and international clients.
+
+---
+
+# Sales Process
+
+1. Initial client inquiry is received by a sales agent.
+2. The agent qualifies the client and identifies needs.
+3. Relevant properties are selected and shared with the client.
+4. A presentation is prepared for the client.
+5. Price negotiations may occur.
+6. Final approval is required before signing any agreement.
+7. Contract is signed by authorized management.
+
+---
+
+# Property Listing Rules
+
+Every property presentation must include:
+- Location
+- Total area (square meters)
+- Price
+- Current status (available / reserved / sold)
+
+Agents must NOT:
+- Promise guaranteed returns
+- Provide legal or tax advice
+- Modify official floor plans
+
+All descriptions should be factual and neutral.
+
+---
+
+# Pricing and Discounts Policy
+
+Standard prices are approved by management.
+
+Sales agents:
+- CANNOT offer discounts independently
+- MUST request approval for any price change
+
+Discount approval:
+- Up to 3%: Sales Manager approval
+- Above 3%: Director approval
+
+All approved discounts must be documented.
+
+---
+
+# Client Communication Guidelines
+
+Response time:
+- New inquiries: within 24 hours
+- Existing clients: within 1 business day
+
+Tone:
+- Professional
+- Clear
+- Neutral
+- No slang
+
+Agents should avoid:
+- Making informal promises
+- Sharing internal information
+- Discussing unapproved pricing
+
+---
+
+# Internal Roles and Responsibilities
+
+Sales Agent:
+- Communicates with clients
+- Prepares property presentations
+
+Sales Manager:
+- Approves discounts up to 3%
+- Reviews sales documents
+
+Director:
+- Approves major discounts
+- Signs final agreements
+
+Marketing Team:
+- Prepares marketing materials
+- Does not communicate pricing to clients`
 
 const SYSTEM_PROMPT = `You are an internal knowledge assistant for a real estate company.
 
@@ -57,9 +146,10 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ answer })
   } catch (error) {
-    console.error('API error:', error)
+    const message = error instanceof Error ? error.message : 'Unknown error'
+    console.error('API error:', message)
     return NextResponse.json(
-      { error: 'Failed to process request' },
+      { error: message },
       { status: 500 }
     )
   }
