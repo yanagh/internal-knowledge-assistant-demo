@@ -8,11 +8,11 @@ interface Message {
 }
 
 const QUICK_QUESTIONS = [
-  'What is the discount approval process?',
-  'What markets do we operate in?',
-  'What must be included in property listings?',
-  'What is the response time for new inquiries?',
-  'Who can sign final agreements?',
+  'Discount approval process?',
+  'Our markets?',
+  'Property listing rules?',
+  'Response time?',
+  'Who signs agreements?',
 ]
 
 export default function Home() {
@@ -68,29 +68,15 @@ export default function Home() {
         {/* Chat Area */}
         <div className="flex-1 overflow-y-auto p-6 space-y-4">
           {messages.length === 0 ? (
-            <div className="py-8">
-              <div className="text-center mb-8">
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-slate-100 rounded-full mb-4">
                   <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <h2 className="text-lg font-medium text-slate-700 mb-2">How can I help you?</h2>
-                <p className="text-slate-500 text-sm">Select a question below or type your own</p>
-              </div>
-
-              {/* Quick Questions */}
-              <div className="space-y-2">
-                {QUICK_QUESTIONS.map((question, i) => (
-                  <button
-                    key={i}
-                    onClick={() => sendMessage(question)}
-                    disabled={loading}
-                    className="w-full text-left px-4 py-3 bg-white border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-50 transition-colors text-slate-700 text-sm disabled:opacity-50"
-                  >
-                    {question}
-                  </button>
-                ))}
+                <p className="text-slate-500 text-sm">Click a quick question or type your own below</p>
               </div>
             </div>
           ) : (
@@ -125,6 +111,22 @@ export default function Home() {
               )}
             </>
           )}
+        </div>
+
+        {/* Quick Questions - Always visible */}
+        <div className="bg-slate-50 px-4 py-2 border-t border-slate-100">
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+            {QUICK_QUESTIONS.map((question, i) => (
+              <button
+                key={i}
+                onClick={() => sendMessage(question)}
+                disabled={loading}
+                className="flex-shrink-0 px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs text-slate-600 hover:bg-slate-100 hover:border-slate-300 transition-colors disabled:opacity-50 whitespace-nowrap"
+              >
+                {question}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Input Area */}
