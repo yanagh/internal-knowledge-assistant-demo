@@ -158,7 +158,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="text-sm text-slate-500 hover:text-slate-700 transition-colors"
           >
-            Built by YC Projects
+            Built by yanaintech.com
           </a>
         </footer>
       </div>
