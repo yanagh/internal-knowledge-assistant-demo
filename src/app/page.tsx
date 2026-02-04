@@ -153,7 +153,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="bg-white border-t border-slate-200 px-6 py-3 text-center">
           <a
-            href="https://ycprojects.vercel.app/"
+            href="https://www.yanaintech.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-slate-500 hover:text-slate-700 transition-colors"
